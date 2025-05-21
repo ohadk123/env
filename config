@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+
+ln -sd ~/env/.config/waybar/ ~/.config/waybar 
+ln -sd ~/env/.config/hypr/ ~/.config/hypr
+ln -sd ~/env/.config/kitty ~/.config/kitty
