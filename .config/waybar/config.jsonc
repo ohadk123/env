@@ -9,7 +9,7 @@
 		"custom/right-arrow-dark"
 	],
 	"modules-center": [
-		"custom/left-arrow-dark",
+		"custom/left-arrow-dark#l",
 		"clock#1",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
@@ -24,6 +24,9 @@
 		"pulseaudio",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
+		"network",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
 		"memory",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
@@ -34,6 +37,10 @@
 	],
 
 	"custom/left-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-dark#l": {
 		"format": "",
 		"tooltip": false
 	},
@@ -82,6 +89,10 @@
 		"scroll-step": 5,
 		"on-click": "pamixer -t",
 		"on-click-right": "pavucontrol"
+	},
+	"network": {
+		"max-length": 15,
+		"format-wifi": "<span color='#00FFFF'>  </span>{essid} "	
 	},
 	"memory": {
 		"interval": 5,
