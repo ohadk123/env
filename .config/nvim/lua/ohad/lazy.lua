@@ -30,6 +30,14 @@ require("lazy").setup({
 		priority = 1000,
 	},
 
+    -- Rosepine - theme
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        lazy = false,
+        priority = 1000,
+    },
+
 	-- Which Key - keymap helper
 	{
 		"folke/which-key.nvim",
@@ -336,7 +344,7 @@ require("lazy").setup({
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			-- Enable the following language servers
-			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+			--  Feel free to .add/remove any LSPs that you want here. They will automatically be installed.
 			--
 			--  Add any additional override configuration in the following tables. Available keys are:
 			--  - cmd (table): Override the default command used to start the server
