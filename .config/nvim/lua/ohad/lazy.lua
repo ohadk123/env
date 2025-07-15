@@ -146,10 +146,10 @@ require("lazy").setup({
 			-- Toggle previous & next buffers stored within Harpoon list
 			vim.keymap.set("n", "<C-S-P>", function()
 				harpoon:list():prev()
-			end, { desc = "[S]witch to [N]ext File" })
+			end, { desc = "[S]witch to [P]revious File" })
 			vim.keymap.set("n", "<C-S-N>", function()
 				harpoon:list():next()
-			end, { desc = "[S]witch to [P]revious File" })
+			end, { desc = "[S]witch to [N]ext File" })
 		end,
 	},
 
