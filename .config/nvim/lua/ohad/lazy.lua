@@ -5,7 +5,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
             { "failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out, "WarningMsg" },
+            { out,                            "WarningMsg" },
             { "\nPress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
@@ -190,7 +190,7 @@ require("lazy").setup({
             { "mason-org/mason.nvim", opts = {} },
             "mason-org/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
-            { "j-hui/fidget.nvim", opts = {} },
+            { "j-hui/fidget.nvim",    opts = {} },
             "saghen/blink.cmp",
         },
         config = function()
@@ -407,10 +407,10 @@ require("lazy").setup({
                     --    See the README about individual language/framework/plugin snippets:
                     --    https://github.com/rafamadriz/friendly-snippets
                     {
-                      'rafamadriz/friendly-snippets',
-                      config = function()
-                        require('luasnip.loaders.from_vscode').lazy_load()
-                      end,
+                        'rafamadriz/friendly-snippets',
+                        config = function()
+                            require('luasnip.loaders.from_vscode').lazy_load()
+                        end,
                     },
                 },
                 opts = {},
@@ -457,7 +457,7 @@ require("lazy").setup({
             completion = {
                 -- By default, you may press `<c-space>` to show the documentation.
                 -- Optionally, set `auto_show = true` to show the documentation after a delay.
-                documentation = { auto_show = false, auto_show_delay_ms = 500 },
+                documentation = { auto_show = true, auto_show_delay_ms = 500 },
             },
 
             sources = {
@@ -481,5 +481,18 @@ require("lazy").setup({
             -- Shows a signature help window while you type arguments for a function
             signature = { enabled = true },
         },
+    },
+
+    {
+        'mrcjkb/rustaceanvim',
+        ft = 'rust',
+        dependencies = { 'saghen/blink.cmp' },
+        init = function()
+            vim.g.rustaceanvim = {
+                server = {
+                    capabilities = require('blink.cmp').get_lsp_capabilities(),
+                },
+            }
+        end,
     },
 })
