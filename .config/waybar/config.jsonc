@@ -21,17 +21,32 @@
     "cpu",
     "battery",
   ],
+
+  // "hyprland/workspaces": {
+  //   "disable-scroll": false,
+  //   "all-outputs": true,
+  //   "format": "{icon}",
+  //   "on-click": "activate",
+  //   "format-icons": {
+  //     "1": "",
+  //     "2": "",
+  //     "default": "{id}"
+  //   }
+  // },
+
   "hyprland/workspaces": {
-    "disable-scroll": false,
-    "all-outputs": true,
-    "format": "{icon}",
-    "on-click": "activate",
-    "format-icons": {
-      "1": "",
-      "2": "",
-      "default": ""
-    }
+    "format": "<sub>{icon}</sub> {windows}",
+    "format-window-separator": " ",
+    "window-rewrite-default": "",
+    "window-rewrite": {
+      "brave": "",
+      "title<.*nvim.*>": "",
+      "title<.*github.*>": "",
+      "title<.*stremio.*>": "",
+      "kitty": "",
+    },
   },
+
   "custom/lock": {
   "format": "<span color='#00FFFF'>  </span>",
   "on-click": "hyprlock",
@@ -65,7 +80,7 @@
 
   "custom/vpn": {
     "exec": "~/.config/waybar/wofi-nordvpn -s",
-    "format": "<span color='#00FF7F'>{icon}</span>{} ",
+    "format": "<span color='#00FF7F'>{icon} </span>{text} ",
     "interval": 1,
     "on-click": "$HOME/.config/waybar/wofi-nordvpn &",
     "format-icons": ["",""],

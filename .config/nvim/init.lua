@@ -1,1 +1,3 @@
-require("ohad")
+require("plugins")
+require("keymap")
+require("opt")
