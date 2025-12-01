@@ -12,7 +12,8 @@ end
 map("<C-r>", "\"hy:%s/<C-r>h//gc<left><left><left>", "[R]eplace highlighted text", "v")
 map("Q", ":q<CR>", "[Q]uit");
 map("W", ":w<CR>", "[W]rite");
-map("<leader>pv", vim.cmd.Ex, "Directory View")
+-- map("<leader>pv", vim.cmd.Ex, "Directory View")
+map("<leader>pv", ":Oil<CR>", "Directory View")
 
 
 -- FzfLua - Fuzzy Finder
