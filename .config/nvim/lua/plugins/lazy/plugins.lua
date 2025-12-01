@@ -34,7 +34,7 @@ return {
         "folke/which-key.nvim",
         event = "VeryLazy",
     },
-    
+
     {
         "folke/lazydev.nvim",
         ft = "lua",
@@ -44,13 +44,13 @@ return {
             },
         },
     },
-    
+
     -- {
     --     "nvim-telescope/telescope.nvim",
     --     tag = "0.1.8",
     --     dependencies = { "nvim-lua/plenary.nvim" },
     -- },
-    
+
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
@@ -63,5 +63,9 @@ return {
     {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
+    },
+    {
+         "jake-stewart/multicursor.nvim",
+        branch = "1.0",
     },
 }
