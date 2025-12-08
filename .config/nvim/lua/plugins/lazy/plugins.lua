@@ -65,7 +65,7 @@ return {
         event = "InsertEnter",
     },
     {
-         "jake-stewart/multicursor.nvim",
+        "jake-stewart/multicursor.nvim",
         branch = "1.0",
     },
     {

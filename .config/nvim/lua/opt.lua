@@ -47,3 +47,4 @@ vim.opt.cursorline = true
 vim.opt.confirm = true
 
 vim.diagnostic.config({ float = { border = "single" } })
+vim.opt.winborder = "rounded"

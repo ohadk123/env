@@ -8,6 +8,7 @@ require("oil").setup({
     win_options = {
         wrap = true,
         signcolumn = "yes",
+        winbar = "%{v:lua.require('oil').get_current_dir()}",
     },
 
     delete_to_trash = true,
