@@ -3,9 +3,10 @@ return {
     "rose-pine/neovim",
     "williamboman/mason.nvim",
     "mbbill/undotree",
-    "nvim-treesitter/nvim-treesitter",
     "neovim/nvim-lspconfig",
     "ibhagwan/fzf-lua",
+    "Vonr/align.nvim",
+    "f-person/git-blame.nvim",
     {
         "saghen/blink.cmp",
         event = "VimEnter",
@@ -44,13 +45,6 @@ return {
             },
         },
     },
-
-    -- {
-    --     "nvim-telescope/telescope.nvim",
-    --     tag = "0.1.8",
-    --     dependencies = { "nvim-lua/plenary.nvim" },
-    -- },
-
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
@@ -78,5 +72,30 @@ return {
         -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
         -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
         lazy = false,
+    },
+    {
+        'nvim-treesitter/nvim-treesitter',
+        branch = 'master', -- Explicitly use the old branch
+        build = ':TSUpdate',
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                ensure_installed = { "c", "lua", "vim", "vimdoc", "rust", "go" },
+                sync_install = false,
+                auto_install = true,
+
+                highlight = {
+                    enable = true,
+                    disable = function(lang, buf)
+                        local max_filesize = 1024 * 1024
+                        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                        if ok and stats and stats.size > max_filesize then
+                            return true
+                        end
+                    end,
+
+                    additional_vim_regex_highlights = false,
+                },
+            })
+        end,
     }
 }

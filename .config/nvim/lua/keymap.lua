@@ -4,8 +4,8 @@ vim.g.maplocalleader = ' '
 -- local map = vim.keymap.set
 
 local map = function(keys, func, desc, mode)
-    mode = mode or "n"
-    vim.keymap.set(mode, keys, func, { desc = desc })
+	mode = mode or "n"
+	vim.keymap.set(mode, keys, func, { desc = desc })
 end
 
 -- Personal
@@ -13,6 +13,8 @@ map("<C-r>", "\"hy:%s/<C-r>h//gc<left><left><left>", "[R]eplace highlighted text
 map("Q", ":q<CR>", "[Q]uit");
 map("W", ":w<CR>", "[W]rite");
 map("-", ":Oil<CR>", "Directory View")
+map("T", "<C-w>v:term<CR>", "Open [T]erminal in vertical split")
+map("<Esc>", "<C-\\><C-n>", "Exit terminal inster mode", "t")
 
 
 -- FzfLua - Fuzzy Finder
@@ -31,7 +33,7 @@ map("<leader>su", FzfLua.grep_cword, "Word [U]nder Cursor")
 
 -- Git Shortcuts
 map("<leader>gs", FzfLua.git_status, "[S]tatus")
-map("<leader>gb", FzfLua.git_blame, "[B]lame")
+map("<leader>gb", FzfLua.git_branches, "[B]ranches")
 map("<leader>gt", FzfLua.git_tags, "[T]ags")
 map("<leader>gd", FzfLua.git_diff, "[D]iff")
 map("<leader>gc", FzfLua.git_commits, "[C]ommits")
@@ -53,31 +55,31 @@ map("<C-Space>", vim.lsp.buf.hover, "LSP Hover")
 local harpoon = require("harpoon")
 
 map("<leader>a", function()
-    harpoon:list():add()
+	harpoon:list():add()
 end, "[A]dd File to Harpoon")
 map("<C-e>", function()
-    harpoon.ui:toggle_quick_menu(harpoon:list())
+	harpoon.ui:toggle_quick_menu(harpoon:list())
 end, "Open Harpoon List")
 
 map("<leader>1", function()
-    harpoon:list():select(1)
+	harpoon:list():select(1)
 end, "Goto File [1]")
 map("<leader>2", function()
-    harpoon:list():select(2)
+	harpoon:list():select(2)
 end, "Goto File [2]")
 map("<leader>3", function()
-    harpoon:list():select(3)
+	harpoon:list():select(3)
 end, "Goto File [3]")
 map("<leader>4", function()
-    harpoon:list():select(4)
+	harpoon:list():select(4)
 end, "Goto File [4]")
 
 -- Toggle previous & next buffers stored within Harpoon list
 map("<C-S-P>", function()
-    harpoon:list():prev()
+	harpoon:list():prev()
 end, "[S]witch to [P]revious File")
 map("<C-S-N>", function()
-    harpoon:list():next()
+	harpoon:list():next()
 end, "[S]witch to [N]ext File")
 
 -- UndoTree
@@ -112,21 +114,21 @@ set({ "n", "x" }, "<c-q>", mc.toggleCursor)
 -- Mappings defined in a keymap layer only apply when there are
 -- multiple cursors. This lets you have overlapping mappings.
 mc.addKeymapLayer(function(layerSet)
-    -- Select a different cursor as the main one.
-    layerSet({ "n", "x" }, "<left>", mc.prevCursor)
-    layerSet({ "n", "x" }, "<right>", mc.nextCursor)
+	-- Select a different cursor as the main one.
+	layerSet({ "n", "x" }, "<left>", mc.prevCursor)
+	layerSet({ "n", "x" }, "<right>", mc.nextCursor)
 
-    -- Delete the main cursor.
-    layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
+	-- Delete the main cursor.
+	layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
 
-    -- Enable and clear cursors using escape.
-    layerSet("n", "<esc>", function()
-        if not mc.cursorsEnabled() then
-            mc.enableCursors()
-        else
-            mc.clearCursors()
-        end
-    end)
+	-- Enable and clear cursors using escape.
+	layerSet("n", "<esc>", function()
+		if not mc.cursorsEnabled() then
+			mc.enableCursors()
+		else
+			mc.clearCursors()
+		end
+	end)
 end)
 
 -- Customize how cursors look.
@@ -138,3 +140,9 @@ hl(0, "MultiCursorMatchPreview", { link = "Search" })
 hl(0, "MultiCursorDisabledCursor", { reverse = true })
 hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
 hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
+
+-- Align
+local align = require("align")
+map("<leader>aa", function() align.align_to_char({ length = 1, }) end, "[A]lign to 1 character", "x")
+map("<leader>aA", function() align.align_to_char({ length = 2, }) end, "[A]lign to 2 characters", "x")
+map("<leader>as", function() align.align_to_string({ preview = true, regex = false }) end, "[A]lign to 2 characters", "x")
