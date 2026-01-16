@@ -24,7 +24,7 @@ require("blink.cmp").setup({
 
 local lsp_capabilities = require('blink.cmp').get_lsp_capabilities()
 
-vim.lsp.enable({ "clangd", "rust_analyzer", "lua_ls" })
+vim.lsp.enable({ "clangd", "rust_analyzer", "lua_ls", "bash-language-server", "c3-lsp"})
 vim.lsp.config("*", {
     capabilities = lsp_capabilities,
 })

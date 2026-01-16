@@ -27,7 +27,7 @@
   font-family: "Font Awesome 6 Free Solid";
 }
 
-#battery,
+#cpu,
 #custom-power {
   background-color: rgba(15,27,53,0.9);
   margin-top: 6px; /* 与屏幕顶部留出距离 */
@@ -87,6 +87,7 @@
 #custom-lock:hover,
 #custom-reboot:hover,
 #custom-power:hover,
+#custom-vpn:hover,
 /*#workspaces:hover,*/
 #window:hover {
   background-color: rgba(70, 75, 90, 0.9);
