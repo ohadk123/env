@@ -7,14 +7,10 @@ require("servers.gopls")(capabilities)
 require("servers.bashls")(capabilities)
 require("servers.clangd")(capabilities)
 
--- Linters & Formatters
-require("servers.efm-langserver")(capabilities)
-
 vim.lsp.enable({
   'lua_ls',
   'pyright',
   'gopls',
   'bashls',
   'clangd',
-  'efm',
 })

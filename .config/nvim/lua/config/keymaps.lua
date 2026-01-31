@@ -27,7 +27,7 @@ map(">", ">gv", "Indent right and reselect", "v")
 map("J", "mzJ`z", "[J]oin lines and keep cursor position")
 
 -- Quick config editing
-map("<leader>rc", "<Cmd>e ~/.config/nvim/init.lua<CR>", "Edit config")
+map("<leader>rc", "<Cmd>e ~/.config/nvim<CR>", "Edit config")
 
 -- FzfLua - Fuzzy Finder
 wk.add({ { "<leader>s", group = "[S]earch" } })
