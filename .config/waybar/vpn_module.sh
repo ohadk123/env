@@ -96,9 +96,9 @@ vpn_report() {
 			echo "$ip_address"
 		fi
 	elif [ "$VPN_STATUS" = "$CONNECTING" ]; then
-		echo " Connecting..."
+		echo "Connecting..."
 	else
-		echo " No VPN"
+		echo "No VPN"
 	fi
 }
 

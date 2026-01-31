@@ -5,96 +5,92 @@
   "spacing": 0,
   "modules-left": [
     "custom/lock",
+    "custom/break",
     "custom/reboot",
+    "custom/break",
     "custom/power",
-    "hyprland/workspaces",
+    "custom/break",
+    "hyprland/workspaces"
   ],
   "modules-center": [
-    "clock",
+    "clock"
   ],
   "modules-right": [
     "network",
+    "custom/break",
     "custom/vpn",
-    "bluetooth",
+    "custom/break",
     "pulseaudio",
-    "temperature",
+    "custom/break",
     "memory",
-    "cpu",
+    "custom/break",
+    "cpu"
   ],
 
-  "hyprland/workspaces": {
-    "format": "<sub>{icon}</sub> {windows}",
-    "format-window-separator": " ",
-    "window-rewrite-default": "",
-    "window-rewrite": {
-      "librewolf": "",
-      "title<.*github.*>": "",
-      "title<.*nvim.*>": "",
-      "freetube": "",
-      "kitty": "",
+    "custom/break": {
+        "format": "|"
     },
+
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "warp-on-scroll": false,
+    "format": "{name}",
+     "persistent-workspaces": {
+         "*": 5
+     }
   },
 
+
   "custom/lock": {
-  "format": "<span color='#00FFFF'>  </span>",
+  "format": " ",
   "on-click": "hyprlock",
   "tooltip": true,
   "tooltip-format": "Lock Screen"
   },
 
   "custom/reboot": {
-    "format": "<span color='#FFD700'>  </span>",
+    "format": " ",
     "on-click": "systemctl reboot",
     "tooltip": true,
     "tooltip-format": "Restart"
   },
 
   "custom/power": {
-    "format": "<span color='#FF4040'>  </span>",
+    "format": " ",
     "on-click": "systemctl poweroff",
     "tooltip": true,
     "tooltip-format": "Poweroff"
   },
 
   "network": {
-    "format-wifi": "<span color='#00FFFF'> 󰤨 </span>{essid} ",
-    "format-ethernet": "<span color='#7FFF00'>  </span>Wired ",
-    "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
-    "format-linked": "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ",
-    "format-disconnected": "<span color='#FF4040'>  </span>Disconnected ",
-    "format-alt": "<span color='#00FFFF'> 󰤨 </span>{signalStrength}% ",
+    "format-ethernet": " Wired",
+    "tooltip-format": "󰅧 {bandwidthUpBytes}   󰅢 {bandwidthDownBytes}",
+    "format-disconnected": " Disconnected ",
     "interval": 1
   },
 
   "custom/vpn": {
     "exec": "~/.config/waybar/vpn_module.sh",
-    "format": "<span color='#00FF7F'>{icon}</span>{text} ",
+    "format": "{text} {icon} ",
     "interval": 5,
     "on-click": "~/.config/waybar/vpn_module.sh --toggle-connection &",
     "on-click-right": "~/.config/waybar/vpn_module.sh --location-menu &",
     "on-click-middle": "~/.config/waybar/vpn_module.sh --ip_address &",
     "format-icons": {
-      "off": "",
+      "No VPN": "",
       "default": ""
-    },
-    "tooltip": true,
-    "tooltip-format": "Connected to: {}"
+    }
   },
 
   "pulseaudio": {
-    "format": "<span color='#00FF7F'>{icon}</span>{volume}% ",
-    "format-muted": "<span color='#FF4040'> 󰖁 </span>0% ",
+    "format": "{volume}% {icon}",
+    "format-muted": " 0% ",
     "format-icons": {
-      "headphone": "<span color='#BF00FF'>  </span>",
-      "hands-free": "<span color='#BF00FF'>  </span>",
-      "headset": "<span color='#BF00FF'>  </span>",
-      "phone": "<span color='#00FFFF'>  </span>",
-      "portable": "<span color='#00FFFF'>  </span>",
-      "car": "<span color='#FFA500'>  </span>",
       "default": [
-        "<span color='#808080'> </span>",
-        "<span color='#FFFF66'> </span>",
-        "<span color='#00FF7F'> </span>"
+        "",
+        " ",
+        " "
       ]
     },
     "on-click-right": "pavucontrol -t 3",
@@ -103,36 +99,21 @@
     "tooltip-format": "Volume: {volume}%"
   },
 
-  "temperature": {
-    "exec": "sensors | awk '/^Package id 0:/ {print int($4)}'",
-    "format": "<span color='#FFA500'> </span>{}°C ",
-    "interval": 5,
-    "tooltip": true,
-    "tooltip-format": "当前 CPU 温度: {}°C"
-  },
   "memory": {
-    "format": "<span color='#8A2BE2'> </span>{used:0.1f}G/{total:0.1f}G ",
+    "format": "{used:0.1f}GiB  ",
     "tooltip": true,
     "tooltip-format": "Usage: {used:0.2f}G/{total:0.2f}G"
   },
+
   "cpu": {
-    "format": "<span color='#FF9F0A'> </span>{usage}% ",
+    "format": "{usage}%  ",
     "tooltip": true,
     "on-click": "btop"
   },
+
   "clock": {
     "interval": 1,
-    "format": "{:%A %H:%M %d/%m/%y}",
-    "tooltip": true,
-  },
-
-  "bluetooth": {
-    "format": "<span color='#00BFFF'> </span>{status} ",
-    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-    "on-click": "blueman-manager"
+    "format": "{:%A %H:%M:%S %d/%m/%y}",
   }
 }
 

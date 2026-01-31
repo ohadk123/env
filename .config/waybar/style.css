@@ -1,126 +1,109 @@
+/*
+* Variant: Rosé Pine
+* Maintainer: DankChoir
+*/
+
+@define-color base            #191724;
+@define-color base_transparent  rgba(25, 23, 36, 0.65);
+@define-color surface         #1f1d2e;
+@define-color overlay         #26233a;
+
+@define-color muted           #6e6a86;
+@define-color subtle          #908caa;
+@define-color text            #e0def4;
+
+@define-color love            #eb6f92;
+@define-color gold            #f6c177;
+@define-color rose            #ebbcba;
+@define-color pine            #31748f;
+@define-color foam            #9ccfd8;
+@define-color iris            #c4a7e7;
+
+@define-color highlightLow    #21202e;
+@define-color highlightMed    #403d52;
+@define-color highlightHigh   #524f67;
+
 * {
-  font-family:  "AdwaitaMono Nerd Font";
+  font-family: "AdwaitaMono Nerd Font";
   font-weight: bold;
   font-size: 16px;
-  color: #dcdfe1;
 }
 
 #waybar {
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-  box-shadow: none;
+    background-color: @base_transparent;
+    border-bottom: 2px solid @highlightHigh;
+    color: @text;
 }
 
-#clock,
-#workspaces {
-  /*background-color: rgba(29,31,46, 0.95);*/
-  background-color: rgba(15,27,53,0.9);
-  padding: 4px 6px; /* 保持内部间距 */
-  margin-top: 6px; /* 外部间距增加 */
-  margin-left: 6px; /* 外部间距增加 */
-  margin-right: 6px; /* 外部间距增加 */
-  border-radius: 10px;
-  border-width: 0px;
-}
-
-#workspaces {
-  font-family: "Font Awesome 6 Free Solid";
-}
-
-#cpu,
-#custom-power {
-  background-color: rgba(15,27,53,0.9);
-  margin-top: 6px; /* 与屏幕顶部留出距离 */
-  margin-right: 6px;
-  padding: 4px 4px; /* 保持内部间距 */
-  border-radius: 0 10px 10px 0;
-  border-width: 0px;
-}
-
-#battery {
-  padding-right: 8px;
-}
-
-#network,
-#custom-lock {
-  background-color: rgba(15,27,53,0.9);
-  margin-top: 6px; /* 与屏幕顶部留出距离 */
-  margin-left: 6px;
-  /*margin-bottom: 4px;*/
-  padding: 4px 2px; /* 保持内部间距 */
-  border-radius: 10px 0 0 10px;
-  border-width: 0px;
-}
-
+#custom-lock,
 #custom-reboot,
-#bluetooth,
-#pulseaudio,
+#custom-power,
+#clock,
+#network,
 #custom-vpn,
-#backlight,
-#temperature,
+#pulseaudio,
 #memory,
 #cpu {
-  background-color: rgba(15,27,53,0.9);
-  margin-top: 6px; /* 与屏幕顶部留出距离 */
-  /*margin-bottom: 4px;*/
-  padding: 4px 2px; /* 保持内部间距 */
-  border-width: 0px;
+    padding: 0 4px 0 10px;
 }
 
-#temperature.critical,
-#pulseaudio.muted {
-  color: #FF0000;
-  padding-top: 0;
-}
-
-/* 鼠标悬停变亮一点 */
-#bluetooth:hover,
-#network:hover,
-/*#tray:hover,*/
-#backlight:hover,
-#battery:hover,
-#pulseaudio:hover,
-#temperature:hover,
-#memory:hover,
-#cpu:hover,
-#clock:hover,
 #custom-lock:hover,
 #custom-reboot:hover,
 #custom-power:hover,
+#clock:hover,
+#network:hover,
 #custom-vpn:hover,
-/*#workspaces:hover,*/
-#window:hover {
-  background-color: rgba(70, 75, 90, 0.9);
+#pulseaudio:hover,
+#memory:hover,
+#cpu:hover {
+    background-color: @highlightHigh;
+    border-radius: 10px;
+    font-size: 24px;
 }
 
-/* 工作区激活状态高亮 */
-#workspaces button:hover{
-  background-color: rgba(97, 175, 239, 0.2);
-  padding: 2px 8px;
-  margin: 0 2px;
-  border-radius: 10px;
-}
-
-#workspaces button.active {
-  background-color: #61afef; /* 蓝色高亮 */
-  color: #ffffff;
-  padding: 2px 8px;
-  margin: 0 2px;
-  border-radius: 10px;
-}
-
-/* 未激活工作区按钮 */
 #workspaces button {
-  background: transparent;
-  border: none;
-  color: #888888;
-  padding: 2px 8px;
-  margin: 0 2px;
-  font-weight: bold;
+    padding: 0 6px;
+    color: @text;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+#workspaces button.active {
+    color: @gold;
+    border-bottom: 2px solid @gold;
+}
+#workspaces button.empty {
+    color: @subtle;
 }
 
-#window {
-  font-weight: 500;
-  font-style: italic;
+#custom-lock {
+    color: @foam;
 }
 
+#custom-reboot {
+    color: @gold;
+}
+
+#custom-power {
+    color: @love;
+}
+
+#network {
+    color: @gold;
+}
+
+#custom-vpn {
+    color: @rose;
+}
+
+#pulseaudio {
+    color: @pine;
+}
+
+#memory {
+    color: @foam;
+}
+
+#cpu {
+    color: @iris;
+}
