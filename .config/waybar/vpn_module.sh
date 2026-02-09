@@ -2,21 +2,21 @@
 
 ## @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ## vpn_module: vpn scripts for a polybar, setup stock for Mullvad VPN
-## 	by Shervin S. (shervin@tuta.io)
+##  by Shervin S. (shervin@tuta.io)
 
-## 	vpn_module reports your VPN's status as [<ip_address> | connecting... | No VPN ].
+##  vpn_module reports your VPN's status as [<ip_address> | connecting... | No VPN ].
 ##  With optional dependencies, <ip_address> will be replaced with <city> <country>.
 ##  You can also connect and disconnect via left-clicks, or with rofi, right-click to
 ##  access a menu and select between your favorite locations, set in VPN_LOCATIONS,
 ##  as well as 35 countries covered by Mullvad VPN.
 
-##	dependencies (assuming use with Mullvad VPN):
-##		mullvad-vpn (or mullvad-vpn-cli)
+##  dependencies (assuming use with Mullvad VPN):
+##      mullvad-vpn (or mullvad-vpn-cli)
 
-##	optional dependencies:
-##		rofi 				  - allows menu-based control of mullvad
-##		geoip, geoip-database - provide country instead of public ip address
-## 		geoip-database-extra  - also provides city info
+##  optional dependencies:
+##      rofi                  - allows menu-based control of mullvad
+##      geoip, geoip-database - provide country instead of public ip address
+##      geoip-database-extra  - also provides city info
 ##      xclip                 - allows copying ip address to clipboard
 
 ## polybar setup:
@@ -38,9 +38,10 @@ VPN_RELAY_SET_LOCATION="mullvad relay set location"
 ## [Set VPN status parsing]
 # The first command cuts the status, which is compared to keywords below.
 # TODO: Add community submissions for other VPNs to make this section robust!
-VPN_STATUS="$($VPN_GET_STATUS | cut -d' ' -f3)"	# returns Connected/Connecting/<other>
+VPN_STATUS="$($VPN_GET_STATUS | cut -d' ' -f3)" # returns Connected/Connecting/<other>
 CONNECTED=Connected
 CONNECTING=Connecting
+DISCONNECTING=Disconnecting
 
 ## [Set colors] (set each variable to nothing for default color)
 # green=#00CC66
@@ -83,23 +84,15 @@ VPN_LOCATIONS+=("${COUNTRIES[@]}")
 
 vpn_report() {
 # continually reports connection status
-	if [ "$VPN_STATUS" = "$CONNECTED"  ]; then
-		ip_address=$($VPN_GET_STATUS | \
-		awk 'match($0,/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/){print substr($0,RSTART,RLENGTH)}')
-# move this above the first if statement if something breaks
-
-		if hash geoiplookup 2>/dev/null; then
-			country=$(geoiplookup "$ip_address" | head -n1 | cut -c28-)
-			city=$(geoiplookup "$ip_address" | cut -d',' -f5 | sed -n '2{p;q}' | sed 's/ //')
-			echo "$city $country"
-		else
-			echo "$ip_address"
-		fi
-	elif [ "$VPN_STATUS" = "$CONNECTING" ]; then
-		echo "Connecting..."
-	else
-		echo "No VPN"
-	fi
+    if [ "$VPN_STATUS" = "$CONNECTED"  ]; then
+        mullvad status | tail -n1 | awk 'match($0,/[a-zA-Z]+, [a-zA-Z ]+/){printf substr($0,RSTART,RLENGTH)}'
+    elif [ "$VPN_STATUS" = "$CONNECTING" ]; then
+        echo "Connecting..."
+    elif [ "$VPN_STATUS" = "$DISCONNECTING" ]; then
+        echo "Disconnecting..."
+    else
+        echo "No VPN"
+    fi
 }
 
 
@@ -116,86 +109,86 @@ vpn_toggle_connection() {
 vpn_location_menu() {
 # Allows control of VPN via rofi menu. Selects from VPN_LOCATIONS.
 
-	if hash rofi 2>/dev/null; then
+    if hash rofi 2>/dev/null; then
 
-		MENU="$(rofi \
-			-font "$rofi_font" -theme "$rofi_theme" $rofi_location \
-			-columns 1 -width 10 -hide-scrollbar \
-			-line-padding 4 -padding 20 -lines 9 \
-			-sep "|" -dmenu -i -p "$rofi_menu_name" <<< \
-			" $icon_connect (dis)connect| $icon_fav ${VPN_LOCATIONS[0]}| $icon_fav ${VPN_LOCATIONS[1]}| $icon_fav ${VPN_LOCATIONS[2]}| $icon_fav ${VPN_LOCATIONS[3]}| $icon_fav ${VPN_LOCATIONS[4]}| $icon_fav ${VPN_LOCATIONS[5]}| $icon_fav ${VPN_LOCATIONS[6]}| $icon_fav ${VPN_LOCATIONS[7]}| $icon_country ${VPN_LOCATIONS[8]}| $icon_country ${VPN_LOCATIONS[9]}| $icon_country ${VPN_LOCATIONS[10]}| $icon_country ${VPN_LOCATIONS[11]}| $icon_country ${VPN_LOCATIONS[12]}| $icon_country ${VPN_LOCATIONS[13]}| $icon_country ${VPN_LOCATIONS[14]}| $icon_country ${VPN_LOCATIONS[15]}| $icon_country ${VPN_LOCATIONS[16]}| $icon_country ${VPN_LOCATIONS[17]}| $icon_country ${VPN_LOCATIONS[18]}| $icon_country ${VPN_LOCATIONS[19]}| $icon_country ${VPN_LOCATIONS[20]}| $icon_country ${VPN_LOCATIONS[21]}| $icon_country ${VPN_LOCATIONS[22]}| $icon_country ${VPN_LOCATIONS[23]}| $icon_country ${VPN_LOCATIONS[24]}| $icon_country ${VPN_LOCATIONS[25]}| $icon_country ${VPN_LOCATIONS[26]}| $icon_country ${VPN_LOCATIONS[27]}| $icon_country ${VPN_LOCATIONS[28]}| $icon_country ${VPN_LOCATIONS[29]}| $icon_country ${VPN_LOCATIONS[30]}| $icon_country ${VPN_LOCATIONS[31]}| $icon_country ${VPN_LOCATIONS[32]}| $icon_country ${VPN_LOCATIONS[33]}| $icon_country ${VPN_LOCATIONS[34]}| $icon_country ${VPN_LOCATIONS[35]}| $icon_country ${VPN_LOCATIONS[36]}| $icon_country ${VPN_LOCATIONS[37]}| $icon_country ${VPN_LOCATIONS[38]}| $icon_country ${VPN_LOCATIONS[39]}| $icon_country ${VPN_LOCATIONS[40]}| $icon_country ${VPN_LOCATIONS[41]}| $icon_country ${VPN_LOCATIONS[42]}| $icon_country ${VPN_LOCATIONS[43]}")"
+        MENU="$(rofi \
+            -font "$rofi_font" -theme "$rofi_theme" $rofi_location \
+            -columns 1 -width 10 -hide-scrollbar \
+            -line-padding 4 -padding 20 -lines 9 \
+            -sep "|" -dmenu -i -p "$rofi_menu_name" <<< \
+            " $icon_connect (dis)connect| $icon_fav ${VPN_LOCATIONS[0]}| $icon_fav ${VPN_LOCATIONS[1]}| $icon_fav ${VPN_LOCATIONS[2]}| $icon_fav ${VPN_LOCATIONS[3]}| $icon_fav ${VPN_LOCATIONS[4]}| $icon_fav ${VPN_LOCATIONS[5]}| $icon_fav ${VPN_LOCATIONS[6]}| $icon_fav ${VPN_LOCATIONS[7]}| $icon_country ${VPN_LOCATIONS[8]}| $icon_country ${VPN_LOCATIONS[9]}| $icon_country ${VPN_LOCATIONS[10]}| $icon_country ${VPN_LOCATIONS[11]}| $icon_country ${VPN_LOCATIONS[12]}| $icon_country ${VPN_LOCATIONS[13]}| $icon_country ${VPN_LOCATIONS[14]}| $icon_country ${VPN_LOCATIONS[15]}| $icon_country ${VPN_LOCATIONS[16]}| $icon_country ${VPN_LOCATIONS[17]}| $icon_country ${VPN_LOCATIONS[18]}| $icon_country ${VPN_LOCATIONS[19]}| $icon_country ${VPN_LOCATIONS[20]}| $icon_country ${VPN_LOCATIONS[21]}| $icon_country ${VPN_LOCATIONS[22]}| $icon_country ${VPN_LOCATIONS[23]}| $icon_country ${VPN_LOCATIONS[24]}| $icon_country ${VPN_LOCATIONS[25]}| $icon_country ${VPN_LOCATIONS[26]}| $icon_country ${VPN_LOCATIONS[27]}| $icon_country ${VPN_LOCATIONS[28]}| $icon_country ${VPN_LOCATIONS[29]}| $icon_country ${VPN_LOCATIONS[30]}| $icon_country ${VPN_LOCATIONS[31]}| $icon_country ${VPN_LOCATIONS[32]}| $icon_country ${VPN_LOCATIONS[33]}| $icon_country ${VPN_LOCATIONS[34]}| $icon_country ${VPN_LOCATIONS[35]}| $icon_country ${VPN_LOCATIONS[36]}| $icon_country ${VPN_LOCATIONS[37]}| $icon_country ${VPN_LOCATIONS[38]}| $icon_country ${VPN_LOCATIONS[39]}| $icon_country ${VPN_LOCATIONS[40]}| $icon_country ${VPN_LOCATIONS[41]}| $icon_country ${VPN_LOCATIONS[42]}| $icon_country ${VPN_LOCATIONS[43]}")"
 
-	    case "$MENU" in
-			*connect) vpn_toggle_connection; return;;
-			*"${VPN_LOCATIONS[0]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[0]};;
-			*"${VPN_LOCATIONS[1]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[1]};;
-			*"${VPN_LOCATIONS[2]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[2]};;
-			*"${VPN_LOCATIONS[3]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[3]};;
-			*"${VPN_LOCATIONS[4]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[4]};;
-			*"${VPN_LOCATIONS[5]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[5]};;
-			*"${VPN_LOCATIONS[6]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[6]};;
-			*"${VPN_LOCATIONS[7]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[7]};;
-			*"${VPN_LOCATIONS[8]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[8]};;
-			*"${VPN_LOCATIONS[9]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[9]};;
-			*"${VPN_LOCATIONS[10]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[10]}";;
-			*"${VPN_LOCATIONS[11]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[11]}";;
-			*"${VPN_LOCATIONS[12]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[12]}";;
-			*"${VPN_LOCATIONS[13]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[13]}";;
-			*"${VPN_LOCATIONS[14]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[14]}";;
-			*"${VPN_LOCATIONS[15]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[15]}";;
-			*"${VPN_LOCATIONS[16]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[16]}";;
-			*"${VPN_LOCATIONS[17]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[17]}";;
-			*"${VPN_LOCATIONS[18]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[18]}";;
-			*"${VPN_LOCATIONS[19]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[19]}";;
-			*"${VPN_LOCATIONS[20]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[20]}";;
-			*"${VPN_LOCATIONS[21]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[21]}";;
-			*"${VPN_LOCATIONS[22]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[22]}";;
-			*"${VPN_LOCATIONS[23]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[23]}";;
-			*"${VPN_LOCATIONS[24]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[24]}";;
-			*"${VPN_LOCATIONS[25]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[25]}";;
-			*"${VPN_LOCATIONS[26]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[26]}";;
-			*"${VPN_LOCATIONS[27]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[27]}";;
-			*"${VPN_LOCATIONS[28]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[28]}";;
-			*"${VPN_LOCATIONS[29]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[29]}";;
-			*"${VPN_LOCATIONS[30]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[30]}";;
-			*"${VPN_LOCATIONS[31]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[31]}";;
-			*"${VPN_LOCATIONS[32]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[32]}";;
-			*"${VPN_LOCATIONS[33]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[33]}";;
-			*"${VPN_LOCATIONS[34]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[34]}";;
-			*"${VPN_LOCATIONS[35]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[35]}";;
-			*"${VPN_LOCATIONS[36]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[36]}";;
-			*"${VPN_LOCATIONS[37]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[37]}";;
-			*"${VPN_LOCATIONS[38]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[38]}";;
-			*"${VPN_LOCATIONS[39]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[39]}";;
-			*"${VPN_LOCATIONS[40]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[40]}";;
-			*"${VPN_LOCATIONS[41]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[41]}";;
-			*"${VPN_LOCATIONS[42]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[42]}";;
-	    esac
+        case "$MENU" in
+            *connect) vpn_toggle_connection; return;;
+            *"${VPN_LOCATIONS[0]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[0]};;
+            *"${VPN_LOCATIONS[1]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[1]};;
+            *"${VPN_LOCATIONS[2]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[2]};;
+            *"${VPN_LOCATIONS[3]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[3]};;
+            *"${VPN_LOCATIONS[4]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[4]};;
+            *"${VPN_LOCATIONS[5]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[5]};;
+            *"${VPN_LOCATIONS[6]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[6]};;
+            *"${VPN_LOCATIONS[7]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[7]};;
+            *"${VPN_LOCATIONS[8]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[8]};;
+            *"${VPN_LOCATIONS[9]}") $VPN_RELAY_SET_LOCATION ${VPN_CODES[9]};;
+            *"${VPN_LOCATIONS[10]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[10]}";;
+            *"${VPN_LOCATIONS[11]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[11]}";;
+            *"${VPN_LOCATIONS[12]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[12]}";;
+            *"${VPN_LOCATIONS[13]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[13]}";;
+            *"${VPN_LOCATIONS[14]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[14]}";;
+            *"${VPN_LOCATIONS[15]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[15]}";;
+            *"${VPN_LOCATIONS[16]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[16]}";;
+            *"${VPN_LOCATIONS[17]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[17]}";;
+            *"${VPN_LOCATIONS[18]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[18]}";;
+            *"${VPN_LOCATIONS[19]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[19]}";;
+            *"${VPN_LOCATIONS[20]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[20]}";;
+            *"${VPN_LOCATIONS[21]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[21]}";;
+            *"${VPN_LOCATIONS[22]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[22]}";;
+            *"${VPN_LOCATIONS[23]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[23]}";;
+            *"${VPN_LOCATIONS[24]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[24]}";;
+            *"${VPN_LOCATIONS[25]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[25]}";;
+            *"${VPN_LOCATIONS[26]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[26]}";;
+            *"${VPN_LOCATIONS[27]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[27]}";;
+            *"${VPN_LOCATIONS[28]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[28]}";;
+            *"${VPN_LOCATIONS[29]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[29]}";;
+            *"${VPN_LOCATIONS[30]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[30]}";;
+            *"${VPN_LOCATIONS[31]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[31]}";;
+            *"${VPN_LOCATIONS[32]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[32]}";;
+            *"${VPN_LOCATIONS[33]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[33]}";;
+            *"${VPN_LOCATIONS[34]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[34]}";;
+            *"${VPN_LOCATIONS[35]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[35]}";;
+            *"${VPN_LOCATIONS[36]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[36]}";;
+            *"${VPN_LOCATIONS[37]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[37]}";;
+            *"${VPN_LOCATIONS[38]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[38]}";;
+            *"${VPN_LOCATIONS[39]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[39]}";;
+            *"${VPN_LOCATIONS[40]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[40]}";;
+            *"${VPN_LOCATIONS[41]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[41]}";;
+            *"${VPN_LOCATIONS[42]}") $VPN_RELAY_SET_LOCATION "${VPN_CODES[42]}";;
+        esac
 
-	    if [ "$VPN_STATUS" = "$CONNECTED" ]; then
-	        true
-	    else
-	        $VPN_CONNECT
-	    fi
-	fi
+        if [ "$VPN_STATUS" = "$CONNECTED" ]; then
+            true
+        else
+            $VPN_CONNECT
+        fi
+    fi
 }
 
 
 ip_address_to_clipboard() {
 # finds your IP and copies to clipboard
 # could also use https://ifconfig.io, checkip.amazonaws.com
-	ip_address=$(curl --silent https://ipaddr.pub)
-	echo "$ip_address" | xclip -selection clipboard
+    ip_address=$(curl --silent https://ipaddr.pub)
+    echo "$ip_address" | xclip -selection clipboard
 
 # TODO: why doesn't this echo display in polybar?
-	echo "$ip_address"
+    echo "$ip_address"
 }
 
 
 # cases for polybar user_module.ini
 case "$1" in
-	--toggle-connection) vpn_toggle_connection ;;
-	--location-menu) vpn_location_menu ;;
-	--ip-address) ip_address_to_clipboard;;
-	*) vpn_report ;;
+    --toggle-connection) vpn_toggle_connection ;;
+    --location-menu) vpn_location_menu ;;
+    --ip-address) ip_address_to_clipboard;;
+    *) vpn_report ;;
 esac

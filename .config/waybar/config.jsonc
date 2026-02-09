@@ -73,7 +73,7 @@
   "custom/vpn": {
     "exec": "~/.config/waybar/vpn_module.sh",
     "format": "{text} {icon} ",
-    "interval": 5,
+    "interval": 1,
     "on-click": "~/.config/waybar/vpn_module.sh --toggle-connection &",
     "on-click-right": "~/.config/waybar/vpn_module.sh --location-menu &",
     "on-click-middle": "~/.config/waybar/vpn_module.sh --ip_address &",
