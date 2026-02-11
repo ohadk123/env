@@ -48,6 +48,8 @@ vim.opt.winborder = "rounded"
 -- vim.opt.redrawtime = 10000 -- Timeout for syntax highlighting redraw
 -- vim.opt.maxmempattern = 20000 -- Max memory for pattern matching
 -- vim.opt.synmaxcol = 300 -- Syntax highlighting column limit
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- File Handling
 vim.opt.backup = false -- Don't create backup files
