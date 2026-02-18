@@ -5,14 +5,21 @@ end
 
 local wk = require("which-key")
 
--- Personal
+-- Visual mode find and replace
 map("<C-r>", "\"hy:%s/<C-r>h/<C-r>h/gc<left><left><left>", "[R]eplace highlighted text", "v")
+
+-- Write and Quit keymaps
 map("Q", ":q<CR>", "[Q]uit");
 map("W", ":w<CR>", "[W]rite");
+
+-- Open directory
 map("-", ":Oil<CR>", "Directory View")
+
+-- Terminal
 map("T", "<C-w>v:term<CR>", "Open [T]erminal in vertical split")
 map("<Esc>", "<C-\\><C-n>", "Exit terminal mode", "t")
 
+-- Claude Code - with persistent width
 map("<leader>cC", ":ClaudeCode<CR>:setl wfw<CR>")
 map("<C-c>", ":ClaudeCodeContinue<CR>:setl wfw<CR>")
 
@@ -26,8 +33,8 @@ map("<C-u>", "<C-u>zz", "Half page up (centered)")
 map("<", "<gv", "Indent left and reselect", "v")
 map(">", ">gv", "Indent right and reselect", "v")
 
--- Better J behavior
-map("J", "mzJ`z", "[J]oin lines and keep cursor position")
+-- Better J behavior - keep cursor position
+map("J", "mzJ`z", "[J]oin lines")
 
 -- Quick config editing
 map("<leader>rc", "<Cmd>e ~/.config/nvim<CR>", "Edit config")
