@@ -4,14 +4,19 @@
 -- LINKS :
 --   > github                  : https://github.com/neovim/nvim-lspconfig
 --   > mason.nvim (dep)        : https://github.com/mason-org/mason.nvim
---   > efmls-configs-nvim (dep): https://github.com/creativenull/efmls-configs-nvim
---   > cmp-nvim-lsp (dep)      : https://github.com/hrsh7th/cmp-nvim-lsp
 -- ================================================================================================
 
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        { "mason-org/mason.nvim", opts = {} }, -- LSP/DAP/Linter installer & manager
+        { "mason-org/mason.nvim", opts = {
+            registries = {
+                "github:mason-org/mason-registry",
+            },
+            providers = {
+                "mason.providers.client",
+            },
+        } }, -- LSP/DAP/Linter installer & manager
     },
     config = function()
         require("utils.diagnostics").setup()

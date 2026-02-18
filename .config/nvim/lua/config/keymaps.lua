@@ -13,6 +13,9 @@ map("-", ":Oil<CR>", "Directory View")
 map("T", "<C-w>v:term<CR>", "Open [T]erminal in vertical split")
 map("<Esc>", "<C-\\><C-n>", "Exit terminal mode", "t")
 
+map("<leader>cC", ":ClaudeCode<CR>:setl wfw<CR>")
+map("<C-c>", ":ClaudeCodeContinue<CR>:setl wfw<CR>")
+
 -- Center screen when jumping
 map("n", "nzzzv", "Next search result (centered)")
 map("N", "Nzzzv", "Previous search result (centered)")
