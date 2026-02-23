@@ -21,7 +21,6 @@ return {
                 },
             },
         },
-        explorer = { enabled = true },
         indent = { enabled = true },
         input = { enabled = true },
         notifier = { enabled = true },
@@ -35,5 +34,5 @@ return {
 
     keys = {
         { "<leader>G", function() require("snacks").lazygit() end, desc = "Lazy[G]it" },
-    }
+    },
 }

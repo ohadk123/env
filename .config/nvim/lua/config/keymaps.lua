@@ -12,8 +12,15 @@ map("<C-r>", "\"hy:%s/<C-r>h/<C-r>h/gc<left><left><left>", "[R]eplace highlighte
 map("Q", ":q<CR>", "[Q]uit");
 map("W", ":w<CR>", "[W]rite");
 
--- Open directory
+-- File Explorer
 map("-", ":Oil<CR>", "Directory View")
+map("<leader>ed", ":lua MiniFiles.open()<CR>", "Open [E]xplorer in current [D]irectory")
+map("<leader>ef", function()
+        MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+        MiniFiles.reveal_cwd()
+    end,
+    "Open [E]xplorer in current [F]ile"
+)
 
 -- Terminal
 map("T", "<C-w>v:term<CR>", "Open [T]erminal in vertical split")
