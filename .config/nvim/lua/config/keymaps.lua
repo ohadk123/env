@@ -33,6 +33,10 @@ map("<C-u>", "<C-u>zz", "Half page up (centered)")
 map("<", "<gv", "Indent left and reselect", "v")
 map(">", ">gv", "Indent right and reselect", "v")
 
+-- Move lines
+map("<M-k>", ":m '<-2<CR>gv=gv", "Move selected lines up", "v")
+map("<M-j>", ":m '>+1<CR>gv=gv", "Move selected lines down", "v")
+
 -- Better J behavior - keep cursor position
 map("J", "mzJ`z", "[J]oin lines")
 
@@ -51,8 +55,6 @@ map("<leader>sv", FzfLua.grep_visual, "[V]isual Selection")
 map("<leader>sr", FzfLua.oldfiles, "[R]ecent Files")
 map("<leader>sh", FzfLua.help_tags, "[H]elp")
 map("<leader>su", FzfLua.grep_cword, "Word [U]nder Cursor")
-map("<leader>sd", FzfLua.diagnostics_document, "[D]iagnostics in document")
-map("<leader>sD", FzfLua.diagnostics_document, "[D]iagnostics in workspace")
 
 -- Git Shortcuts
 wk.add({ { "<leader>g", group = "[G]it" } })
@@ -74,6 +76,8 @@ map("<leader>lS", FzfLua.lsp_live_workspace_symbols, "[S]earch Workspace [S]ymbo
 map("<leader>la", FzfLua.lsp_code_actions, "Code [A]ctions")
 map("<leader>lf", vim.lsp.buf.format, "[F]ormat")
 map("<leader>lR", vim.lsp.buf.rename, "[R]ename")
+map("<leader>ldd", FzfLua.diagnostics_document, "[D]ocument [D]iagnostics")
+map("<leader>lwd", FzfLua.diagnostics_workspace, "[W]orkspace [D]iagnostics")
 map("<C-Space>", vim.lsp.buf.hover, "LSP Hover")
 
 -- Align.nvim - align lines
@@ -99,3 +103,7 @@ map("<c-leftmouse>", mc.handleMouse)
 map("<c-leftdrag>", mc.handleMouseDrag)
 map("<c-leftmouse>", mc.handleMouseRelease)
 map("<c-q>", mc.toggleCursor, "", { "n", "x" })
+
+-- Sessions
+local per = require("persistence")
+map("<leader>ss", function() per.select() end, "[S]ession")
