@@ -6,11 +6,13 @@ require("servers.pyright")(capabilities)
 require("servers.gopls")(capabilities)
 require("servers.bashls")(capabilities)
 require("servers.clangd")(capabilities)
+require("servers.c3lsp")(capabilities)
 
 vim.lsp.enable({
-  'lua_ls',
-  'pyright',
-  'gopls',
-  'bashls',
-  'clangd',
+    'lua_ls',
+    'pyright',
+    'gopls',
+    'bashls',
+    'clangd',
+    'c3lsp',
 })
