@@ -17,6 +17,7 @@ return {
                 "mason.providers.client",
             },
         } }, -- LSP/DAP/Linter installer & manager
+         "williamboman/mason-lspconfig.nvim",
     },
     config = function()
         require("utils.diagnostics").setup()
