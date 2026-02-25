@@ -83,8 +83,8 @@ map("<leader>lS", FzfLua.lsp_live_workspace_symbols, "[S]earch Workspace [S]ymbo
 map("<leader>la", FzfLua.lsp_code_actions, "Code [A]ctions")
 map("<leader>lf", vim.lsp.buf.format, "[F]ormat")
 map("<leader>lR", vim.lsp.buf.rename, "[R]ename")
-map("<leader>ldd", FzfLua.diagnostics_document, "[D]ocument [D]iagnostics")
-map("<leader>lwd", FzfLua.diagnostics_workspace, "[W]orkspace [D]iagnostics")
+map("<leader>le", FzfLua.diagnostics_document, "Document [E]rrors")
+map("<leader>lE", FzfLua.diagnostics_workspace, "Workspace [E]rrors")
 map("<C-Space>", vim.lsp.buf.hover, "LSP Hover")
 
 -- Align.nvim - align lines
