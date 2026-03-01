@@ -85,7 +85,8 @@ VPN_LOCATIONS+=("${COUNTRIES[@]}")
 vpn_report() {
 # continually reports connection status
     if [ "$VPN_STATUS" = "$CONNECTED"  ]; then
-        mullvad status | tail -n1 | awk 'match($0,/[a-zA-Z]+, [a-zA-Z ]+/){printf substr($0,RSTART,RLENGTH)}'
+        # mullvad status | tail -n1 | awk 'match($0,/[a-zA-Z]+, [a-zA-Z ]+/){printf substr($0,RSTART,RLENGTH)}'
+        mullvad status | tail -n1 | cut -c29- | awk 'match($0,/[a-zA-Z]+/){printf substr($0,RSTART,RLENGTH)}'
     elif [ "$VPN_STATUS" = "$CONNECTING" ]; then
         echo "Connecting..."
     elif [ "$VPN_STATUS" = "$DISCONNECTING" ]; then

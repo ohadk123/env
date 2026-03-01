@@ -22,6 +22,7 @@ return {
 				"lua",
 				"python",
 				"rust",
+                "c3",
 			},
 			auto_install = true, -- auto-install any other parsers on opening new language files
 			sync_install = false,

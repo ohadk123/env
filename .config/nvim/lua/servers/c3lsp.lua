@@ -1,0 +1,8 @@
+return function(capabilities)
+    vim.lsp.config("c3lsp", {
+        capabilities = capabilities,
+        cmd = { "c3lsp" },
+        root_markers = { "project.json", "manifest.json", ".git" },
+        filetypes = { "c3", "c3i" },
+    })
+end
