@@ -27,7 +27,7 @@ map("T", "<C-w>v:term<CR>", "Open [T]erminal in vertical split")
 map("<Esc>", "<C-\\><C-n>", "Exit terminal mode", "t")
 
 -- Claude Code - with persistent width
-map("<leader>cC", ":ClaudeCode<CR>:setl wfw<CR>")
+map("<leader>CC", ":ClaudeCode<CR>:setl wfw<CR>")
 map("<C-c>", ":ClaudeCodeContinue<CR>:setl wfw<CR>")
 
 -- Center screen when jumping
@@ -114,3 +114,8 @@ map("<c-q>", mc.toggleCursor, "", { "n", "x" })
 -- Sessions
 local per = require("persistence")
 map("<leader>ss", function() per.select() end, "[S]ession")
+
+-- Compilation mode
+wk.add({ { "<leader>c", group = "[C]Compilation Mode" } })
+map("<leader>cc", ":Compile<CR>", "Toggle [C]ompilation Mode")
+map("<leader>cr", ":Recompile<CR>", "[R]un code in Compilation Mode")

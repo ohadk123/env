@@ -16,19 +16,19 @@ return {
         vim.g.compile_mode = {
             -- The string to show in the compile prompt as a default.
             -- For an empty prompt, you can use:
-            -- default_command = "",
+            default_command = "",
 
             -- To use different defaults based on filetype, you can use a table:
-            default_command = {
-                python = "python %",
-                lua = "lua %",
-                javascript = "bun %",
-                typescript = "bun %",
-                c = "cc -o %:r % && ./%:r",
-                cpp = "cc -std=c++23 -o %:r % && ./%:r",
-                java = "javac % && java %:r",
-                go = "go run %",
-            },
+            -- default_command = {
+            --     python = "python %",
+            --     lua = "lua %",
+            --     javascript = "bun %",
+            --     typescript = "bun %",
+            --     c = "cc -o %:r % && ./%:r",
+            --     cpp = "cc -std=c++23 -o %:r % && ./%:r",
+            --     java = "javac % && java %:r",
+            --     go = "go run %",
+            -- },
 
             -- A function which returns the default command string is also supported:
             -- default_command = function()
@@ -60,7 +60,7 @@ return {
             error_threshold = require("compile-mode").level.WARNING,
             -- Automatically jump to the first error.
             -- :h compile-mode.auto_jump_to_first_error
-            auto_jump_to_first_error = true,
+            auto_jump_to_first_error = false,
             -- How long to highlight an error's location when jumping to it.
             -- :h compile-mode.error_locus_highlight
             error_locus_highlight = 500,
