@@ -6,6 +6,7 @@ require("mason-lspconfig").setup({
         "lua_ls",
         "bashls",
         "pyright",
+        "rust_analyzer",
     },
 })
 
@@ -16,6 +17,7 @@ require("servers.gopls")(capabilities)
 require("servers.bashls")(capabilities)
 require("servers.clangd")(capabilities)
 require("servers.c3lsp")(capabilities)
+require("servers.rust_analyzer")(capabilities)
 
 vim.lsp.enable({
     'lua_ls',
@@ -24,4 +26,5 @@ vim.lsp.enable({
     'bashls',
     'clangd',
     'c3lsp',
+    'rust_analyzer',
 })
