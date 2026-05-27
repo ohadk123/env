@@ -104,7 +104,7 @@ map("<leader><up>", function() mc.lineSkipCursor(-1) end, "Skip line above", { "
 map("<leader><down>", function() mc.lineSkipCursor(1) end, "Skip line below", { "n", "x" })
 map("<leader>n", function() mc.matchAddCursor(1) end, "Add cursor on match below", { "n", "x" })
 map("<leader>N", function() mc.matchAddCursor(-1) end, "Add cursor on match above", { "n", "x" })
-map("<leader>s", function() mc.matchSkipCursor(1) end, "Skip cursor on match below", { "n", "x" })
+-- map("<leader>s", function() mc.matchSkipCursor(1) end, "Skip cursor on match below", { "n", "x" })
 map("<leader>S", function() mc.matchSkipCursor(-1) end, "Skip cursor on match above", { "n", "x" })
 map("<c-leftmouse>", mc.handleMouse)
 map("<c-leftdrag>", mc.handleMouseDrag)
