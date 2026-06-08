@@ -46,7 +46,7 @@ return {
             tabline = {},
             winbar = {},
             inactive_winbar = {},
-            extensions = {},
+            extensions = { "lazy", "fzf", "oil" },
         })
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
