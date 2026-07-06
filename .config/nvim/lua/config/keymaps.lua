@@ -110,6 +110,7 @@ map("<c-leftmouse>", mc.handleMouse)
 map("<c-leftdrag>", mc.handleMouseDrag)
 map("<c-leftmouse>", mc.handleMouseRelease)
 map("<c-q>", mc.toggleCursor, "", { "n", "x" })
+map("s", mc.splitCursors, "[S]plit", "x")
 
 -- Sessions
 local per = require("persistence")
