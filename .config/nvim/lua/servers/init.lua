@@ -2,11 +2,12 @@ local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 require("mason-lspconfig").setup({
     ensure_installed = {
-        "clangd",
         "lua_ls",
-        "bashls",
         "pyright",
-        "rust_analyzer",
+        "gopls",
+        "bashls",
+        "clangd",
+        "c3_lsp",
     },
 })
 
@@ -16,8 +17,7 @@ require("servers.pyright")(capabilities)
 require("servers.gopls")(capabilities)
 require("servers.bashls")(capabilities)
 require("servers.clangd")(capabilities)
-require("servers.c3lsp")(capabilities)
-require("servers.rust_analyzer")(capabilities)
+require("servers.c3_lsp")(capabilities)
 
 vim.lsp.enable({
     'lua_ls',
@@ -25,6 +25,5 @@ vim.lsp.enable({
     'gopls',
     'bashls',
     'clangd',
-    'c3lsp',
-    'rust_analyzer',
+    'c3_lsp',
 })
