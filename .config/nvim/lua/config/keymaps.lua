@@ -26,10 +26,6 @@ map("<leader>ef", function()
 map("T", "<C-w>v:term<CR>", "Open [T]erminal in vertical split")
 map("<Esc>", "<C-\\><C-n>", "Exit terminal mode", "t")
 
--- Claude Code - with persistent width
-map("<leader>CC", ":ClaudeCode<CR>:setl wfw<CR>")
-map("<C-c>", ":ClaudeCodeContinue<CR>:setl wfw<CR>")
-
 -- Center screen when jumping
 map("n", "nzzzv", "Next search result (centered)")
 map("N", "Nzzzv", "Previous search result (centered)")
@@ -80,7 +76,7 @@ map("<leader>lD", FzfLua.lsp_declarations, "[D]eclaration")
 map("<leader>lt", FzfLua.lsp_typedefs, "[T]ype Definition")
 map("<leader>ls", FzfLua.lsp_document_symbols, "[S]earch Document [S]ymbols")
 map("<leader>lS", FzfLua.lsp_live_workspace_symbols, "[S]earch Workspace [S]ymbols")
-map("<leader>la", FzfLua.lsp_code_actions, "Code [A]ctions")
+map("<leader>la", vim.lsp.buf.code_action, "Code [A]ctions")
 map("<leader>lf", vim.lsp.buf.format, "[F]ormat")
 map("<leader>lR", vim.lsp.buf.rename, "[R]ename")
 map("<leader>le", FzfLua.diagnostics_document, "Document [E]rrors")
@@ -119,3 +115,9 @@ map("<leader>ss", function() per.select() end, "[S]ession")
 wk.add({ { "<leader>c", group = "[C]Compilation Mode" } })
 map("<leader>cc", ":Compile<CR>", "Toggle [C]ompilation Mode")
 map("<leader>cr", ":Recompile<CR>", "[R]un code in Compilation Mode")
+
+-- OpenCode
+wk.add({ { "<leader>o", group = "[O]open Code" } })
+local opencode = require("opencode")
+map("<leader>oa", function() opencode.ask("@this: ") end, "[A]sk", { "n", "x" })
+map("<leader>os", function() opencode.select() end, "[S]elect", { "n", "x" })
