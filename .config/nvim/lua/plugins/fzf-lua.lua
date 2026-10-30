@@ -11,5 +11,10 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
         ui_select = {},
+        lsp = {
+            references = {
+                includeDeclaration = false,
+            },
+        },
     },
 }
