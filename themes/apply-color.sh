@@ -16,3 +16,4 @@ pkill -USR2 waybar || true
 pkill -USR1 kitty || true
 makoctl reload || true
 pkill -USR1 nvim || true
+pkill -USR1 cava || true
