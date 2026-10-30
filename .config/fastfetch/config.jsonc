@@ -91,11 +91,10 @@
             "keyColor": "green"
         },
         {
-            "type": "command",
+            "type": "camera",
             "key": "│ ├󰖠 WEBCAM",
             "keyColor": "green",
-            "text": "fastfetch --camera-format '{1}' --pipe | paste -sd ', ' -",
-            "shell": "/bin/bash"
+            "format": "{1}"
         },
         {
             "type": "memory",
