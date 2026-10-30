@@ -208,7 +208,7 @@ hl.bind(mainMod .. " + T",         hl.dsp.exec_cmd("~/env/themes/apply-color.sh"
 -- move is relative to the monitor; numbers are for 2560x1440 with the 32px bar.
 -- Bottom row is 800px = 40 rows of btop at font_size 12.
 local dashboard = {
-    { cmd = "kitty -o confirm_os_window_close=0 sh -c 'printf \"%s\" \"$(fastfetch --pipe false | head -n -2)\"; tput civis; exec sleep infinity'", move = "7 39",    size = "1810 586" },
+    { cmd = "kitty -o confirm_os_window_close=0 sh -c 'printf \"%s\" \"$(fastfetch --pipe false | head -n -1)\"; tput civis; exec sleep infinity'", move = "7 39",    size = "1810 586" },
     { cmd = "kitty cava",                        move = "1825 39", size = "728 586" },
     { cmd = "spotify",                           move = "7 633",   size = "837 800" },
     { cmd = "kitty -o font_size=14 btop",        move = "852 633", size = "1701 800" },
