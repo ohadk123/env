@@ -133,9 +133,3 @@ map("<leader>ss", function() per.select() end, "[S]ession")
 wk.add({ { "<leader>c", group = "[C]Compilation Mode" } })
 map("<leader>cc", ":Compile<CR>", "Toggle [C]ompilation Mode")
 map("<leader>cr", ":Recompile<CR>", "[R]un code in Compilation Mode")
-
--- OpenCode
-wk.add({ { "<leader>o", group = "[O]open Code" } })
-local opencode = require("opencode")
-map("<leader>oa", function() opencode.ask("@this: ") end, "[A]sk", { "n", "x" })
-map("<leader>os", function() opencode.select() end, "[S]elect", { "n", "x" })
