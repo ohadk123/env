@@ -8,38 +8,29 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
-	event = { "BufReadPost", "BufNewFile" },
 	lazy = false,
 	config = function()
-		require("nvim-treesitter.config").setup({
-			-- language parsers that MUST be installed
-			ensure_installed = {
-				"bash",
-				"c",
-				"cpp",
-				"dockerfile",
-				"go",
-				"lua",
-				"python",
-				"rust",
-                "c3",
-			},
-			auto_install = true, -- auto-install any other parsers on opening new language files
-			sync_install = false,
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-			},
-			indent = { enable = true },
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<CR>",
-					node_incremental = "<CR>",
-					scope_incremental = "<TAB>",
-					node_decremental = "<S-TAB>",
-				},
-			},
+		-- language parsers that MUST be installed (main branch: setup() ignores ensure_installed)
+		require("nvim-treesitter").install({
+			"bash",
+			"c",
+			"cpp",
+			"dockerfile",
+			"go",
+			"lua",
+			"python",
+			"rust",
+			"c3",
+			"zig",
+		})
+
+		vim.api.nvim_create_autocmd("FileType", {
+			callback = function(args)
+				-- no-op if there's no parser for this filetype
+				if pcall(vim.treesitter.start, args.buf) then
+					vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end
+			end,
 		})
 	end,
 }
