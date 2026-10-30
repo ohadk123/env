@@ -125,6 +125,9 @@ hl.animation({ leaf = "workspacesIn",  enabled = true, speed = 1.21, bezier = "a
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
 
 hl.config({
+    dwindle = {
+        preserve_split = true, -- keep split direction fixed so togglesplit (SUPER + I) sticks
+    },
     master = {
         new_status = "master",
     },
