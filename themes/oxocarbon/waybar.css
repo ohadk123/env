@@ -1,0 +1,19 @@
+/* Oxocarbon */
+
+@define-color base_transparent rgba(22, 22, 22, 0.65);
+@define-color text   #f2f4f8;
+
+@define-color bg   @base_transparent; /* Background */
+@define-color bb   #393939;          /* Border Bottom */
+@define-color hbc  #525252;          /* Hover Background Color */
+@define-color ba   #be95ff;          /* Button Active */
+@define-color bec  #6f6f6f;          /* Button Empty Color */
+
+@define-color lock    #78a9ff;
+@define-color reboot  #be95ff;
+@define-color power   #ee5396;
+@define-color network #42be65;
+@define-color vpn     #ff7eb6;
+@define-color audio   #3ddbd9;
+@define-color mem     #82cfff;
+@define-color cpu     #78a9ff;

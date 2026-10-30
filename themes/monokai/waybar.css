@@ -1,0 +1,19 @@
+/* Monokai */
+
+@define-color base_transparent rgba(39, 40, 34, 0.65);
+@define-color text   #f8f8f2;
+
+@define-color bg   @base_transparent; /* Background */
+@define-color bb   #49483e;          /* Border Bottom */
+@define-color hbc  #75715e;          /* Hover Background Color */
+@define-color ba   #e6db74;          /* Button Active */
+@define-color bec  #75715e;          /* Button Empty Color */
+
+@define-color lock    #66d9ef;
+@define-color reboot  #e6db74;
+@define-color power   #f92672;
+@define-color network #a6e22e;
+@define-color vpn     #fd971f;
+@define-color audio   #a1efe4;
+@define-color mem     #ae81ff;
+@define-color cpu     #66d9ef;

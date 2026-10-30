@@ -1,0 +1,19 @@
+/* Vesper */
+
+@define-color base_transparent rgba(16, 16, 16, 0.65);
+@define-color text   #ffffff;
+
+@define-color bg   @base_transparent; /* Background */
+@define-color bb   #282828;          /* Border Bottom */
+@define-color hbc  #505050;          /* Hover Background Color */
+@define-color ba   #ffc799;          /* Button Active */
+@define-color bec  #8b8b8b;          /* Button Empty Color */
+
+@define-color lock    #aca1cf;
+@define-color reboot  #ffc799;
+@define-color power   #ff8080;
+@define-color network #99ffe4;
+@define-color vpn     #ffc799;
+@define-color audio   #90b99f;
+@define-color mem     #e29eca;
+@define-color cpu     #aca1cf;

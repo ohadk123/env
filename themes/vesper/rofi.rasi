@@ -1,0 +1,9 @@
+* {
+	bg: #101010;
+	fgd: #ffffff;
+	sel: #343434;
+	grn: #99ffe4;
+	red: #ff8080;
+	ora: #ffc799;
+	cya: #90b99f;
+}
