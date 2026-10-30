@@ -3,6 +3,3 @@ globals = {
   "FzfLua",
 }
 
-read_globals = {
-  "use",
-}

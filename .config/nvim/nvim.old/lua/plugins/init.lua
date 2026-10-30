@@ -1,6 +1,0 @@
-require("plugins/lazy")
-require("plugins/lsp")
-require("plugins/which-key")
-require("plugins/treesitter")
-require("plugins/lualine")
-require("plugins/oil")
