@@ -23,7 +23,23 @@ map("<leader>ef", function()
 )
 
 -- Terminal
-map("T", "<C-w>v:term<CR>", "Open [T]erminal in vertical split")
+-- One terminal per session: focus it if visible, otherwise show it in a vertical split
+local term_buf
+map("T", function()
+    local alive = term_buf and vim.api.nvim_buf_is_valid(term_buf)
+        and vim.fn.jobwait({ vim.bo[term_buf].channel }, 0)[1] == -1
+    local win = alive and vim.fn.bufwinid(term_buf) or -1
+    if win ~= -1 then
+        return vim.api.nvim_set_current_win(win)
+    end
+    vim.cmd.vsplit()
+    if alive then
+        vim.api.nvim_win_set_buf(0, term_buf)
+    else
+        vim.cmd.terminal()
+        term_buf = vim.api.nvim_get_current_buf()
+    end
+end, "Open [T]erminal in vertical split")
 map("<Esc>", "<C-\\><C-n>", "Exit terminal mode", "t")
 
 -- Center screen when jumping
