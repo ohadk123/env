@@ -42,7 +42,7 @@ return {
         miniSplitJoin.setup({
             mappings = { toggle = "" }, -- Disable default mapping
         })
-        vim.keymap.set({ "n", "x" }, "sj", function() miniSplitJoin.join() end, { desc = "Join arguments" })
-        vim.keymap.set({ "n", "x" }, "sk", function() miniSplitJoin.split() end, { desc = "Split arguments" })
+        vim.keymap.set({ "n", "x" }, "sk", function() miniSplitJoin.join() end, { desc = "Join arguments" })
+        vim.keymap.set({ "n", "x" }, "sj", function() miniSplitJoin.split() end, { desc = "Split arguments" })
     end,
 }
