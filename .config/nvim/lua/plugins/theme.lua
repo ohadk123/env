@@ -1,10 +1,11 @@
+-- Colorschemes, picked by ~/env/themes/current/nvim.lua (see config/autocmds.lua).
+-- lazy.nvim loads each one on demand when :colorscheme asks for it.
 return {
-    "rose-pine/neovim",
-    lazy = false,
-    name = "rose-pine",
-    config = function()
-        -- Inlay hints as plain ghost text (rose-pine gives them a blended background)
-        require("rose-pine").setup({ highlight_groups = { LspInlayHint = { fg = "muted", inherit = false } } })
-        vim.cmd("colorscheme rose-pine")
-    end,
+    { "rose-pine/neovim", name = "rose-pine", lazy = true },
+    { "catppuccin/nvim", name = "catppuccin", lazy = true },
+    { "ellisonleao/gruvbox.nvim", lazy = true },
+    { "rebelot/kanagawa.nvim", lazy = true },
+    { "loctvl842/monokai-pro.nvim", lazy = true },
+    { "nyoom-engineering/oxocarbon.nvim", lazy = true, build = false }, -- ships compiled Lua; skip its luarocks/fennel build
+    { "datsfilipe/vesper.nvim", lazy = true },
 }

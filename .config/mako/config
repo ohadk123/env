@@ -1,10 +1,4 @@
-font="AdwairaMono Nerd Font"
-background-color=#26233a
-text-color=#e0def4
-border-color=#524f67
+font="AdwaitaMono Nerd Font"
 border-radius=10
 default-timeout=5000
-progress-color=over #31748f
-
-[urgency=high]
-border-color=#eb6f92
+include=~/env/themes/current/mako

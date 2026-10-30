@@ -41,3 +41,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.lsp.buf.format({ name = "efm", async = true })
     end,
 })
+
+-- Colorscheme from ~/env/themes/current; apply-color.sh sends SIGUSR1 to switch running instances
+local function apply_theme()
+    vim.o.background = "dark"
+    local ok, err = pcall(dofile, vim.fn.expand("~/env/themes/current/nvim.lua"))
+    if not ok then
+        vim.notify("theme: " .. err, vim.log.levels.WARN)
+    end
+end
+apply_theme()
+vim.api.nvim_create_autocmd("Signal", { pattern = "SIGUSR1", callback = apply_theme })

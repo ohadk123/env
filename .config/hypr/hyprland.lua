@@ -1,8 +1,7 @@
 -- Hyprland Lua config
 -- Converted from hyprland.conf
 
-package.path = os.getenv("HOME") .. "/env/themes/current/?.lua;" .. package.path
-require("hyprland")
+dofile(os.getenv("HOME") .. "/env/themes/current/hyprland.lua")
 
 
 ------------------
@@ -196,6 +195,7 @@ hl.bind(mainMod .. " + F",         hl.dsp.window.fullscreen_state({ internal = 2
 hl.bind(mainMod .. " + B",         hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + S",         hl.dsp.exec_cmd(search))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd(reloadWaybar))
+hl.bind(mainMod .. " + T",         hl.dsp.exec_cmd("~/env/themes/apply-color.sh"))
 
 -- Move focus with mainMod + hjkl
 hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
