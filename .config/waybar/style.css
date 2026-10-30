@@ -12,6 +12,7 @@
     color: @text;
 }
 
+#tray,
 #custom-lock,
 #custom-reboot,
 #custom-power,

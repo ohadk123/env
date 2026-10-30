@@ -16,6 +16,8 @@
     "clock"
   ],
   "modules-right": [
+    "tray",
+    "custom/break",
     "network",
     "custom/break",
     "custom/vpn",
@@ -30,6 +32,12 @@
     "custom/break": {
         "format": "|"
     },
+
+  "tray": {
+    "icon-size": 18,
+    "spacing": 8,
+    "show-passive-items": true
+  },
 
   "hyprland/workspaces": {
     "disable-scroll": true,
@@ -65,6 +73,7 @@
 
   "network": {
     "format-ethernet": " Wired",
+    "on-click": "nm-connection-editor",
     "tooltip-format": "󰅧 {bandwidthUpBytes}   󰅢 {bandwidthDownBytes}",
     "format-disconnected": " Disconnected ",
     "interval": 1

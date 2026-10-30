@@ -40,7 +40,6 @@ local search       = [[rofi -dmenu -p "Search" | xargs -I{} xdg-open "https://ni
 -------------------
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("nm-applet")
     hl.exec_cmd("waybar & hyprpaper")
     hl.exec_cmd("~/.config/waybar/vpn_module.sh --toggle-connection")
 end)
