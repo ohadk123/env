@@ -41,37 +41,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.lsp.buf.format({ name = "efm", async = true })
     end,
 })
-
-local lsp_attach_group = vim.api.nvim_create_augroup("lsp-attach", { clear = true })
-vim.api.nvim_create_autocmd("LspAttach", {
-    group = lsp_attach_group,
-    callback = function(event)
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client:supports_method("textDocument/documentHighlight") then
-            local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
-            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-                buffer = event.buf,
-                group = highlight_augroup,
-                callback = vim.lsp.buf.document_highlight,
-            })
-
-            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-                buffer = event.buf,
-                group = highlight_augroup,
-                callback = vim.lsp.buf.clear_references,
-            })
-
-            vim.api.nvim_create_autocmd("LspDetach", {
-                group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
-                callback = function(event2)
-                    vim.lsp.buf.clear_references()
-                    vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
-                end,
-            })
-        end
-
-        vim.keymap.set("n", "<leader>th", function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-        end, { desc = "Inlay [H]ints" })
-    end,
-})

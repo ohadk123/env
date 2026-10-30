@@ -82,6 +82,7 @@ map("<leader>lR", vim.lsp.buf.rename, "[R]ename")
 map("<leader>le", FzfLua.diagnostics_document, "Document [E]rrors")
 map("<leader>lE", FzfLua.diagnostics_workspace, "Workspace [E]rrors")
 map("<C-Space>", vim.lsp.buf.hover, "LSP Hover")
+map("<leader>th", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })) end, "Inlay [H]ints")
 
 -- Align.nvim - align lines
 wk.add({ { "<leader>a", group = "[A]lign" } })
@@ -104,7 +105,7 @@ map("<leader>N", function() mc.matchAddCursor(-1) end, "Add cursor on match abov
 map("<leader>S", function() mc.matchSkipCursor(-1) end, "Skip cursor on match above", { "n", "x" })
 map("<c-leftmouse>", mc.handleMouse)
 map("<c-leftdrag>", mc.handleMouseDrag)
-map("<c-leftmouse>", mc.handleMouseRelease)
+map("<c-leftrelease>", mc.handleMouseRelease)
 map("<c-q>", mc.toggleCursor, "", { "n", "x" })
 map("s", mc.splitCursors, "[S]plit", "x")
 
