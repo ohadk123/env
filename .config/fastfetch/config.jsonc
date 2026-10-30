@@ -83,7 +83,8 @@
         {
             "type": "monitor",
             "key": "│ ├󰍹 DISPLAY",
-            "keyColor": "green"
+            "keyColor": "green",
+            "format": "{width}x{height} px @ {refresh-rate} Hz ({inch} inches, {ppi} ppi){?hdr-compatible} [HDR Compatible]{?}"
         },
         {
             "type": "sound",
