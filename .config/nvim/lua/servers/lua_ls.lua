@@ -4,11 +4,9 @@
 --   > github: https://github.com/LuaLS/lua-language-server
 -- ================================================================================================
 
---- @param capabilities table LSP client capabilities (typically from nvim-cmp or similar)
 --- @return nil
-return function(capabilities)
+return function()
     vim.lsp.config('lua_ls', {
-        capabilities = capabilities,
         settings = {
             Lua = {
                 diagnostics = {

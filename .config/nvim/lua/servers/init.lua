@@ -1,4 +1,3 @@
-local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 require("mason-lspconfig").setup({
     ensure_installed = {
@@ -12,12 +11,12 @@ require("mason-lspconfig").setup({
 })
 
 -- Language Server Protocol (LSP)
-require("servers.lua_ls")(capabilities)
-require("servers.pyright")(capabilities)
-require("servers.gopls")(capabilities)
-require("servers.bashls")(capabilities)
-require("servers.clangd")(capabilities)
-require("servers.c3_lsp")(capabilities)
+require("servers.lua_ls")()
+require("servers.pyright")()
+require("servers.gopls")()
+require("servers.bashls")()
+require("servers.clangd")()
+require("servers.c3_lsp")()
 
 vim.lsp.enable({
     'lua_ls',

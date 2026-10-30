@@ -4,11 +4,9 @@
 --   > website: https://clangd.llvm.org/
 -- ================================================================================================
 
---- @param capabilities table LSP client capabilities (typically from nvim-cmp or similar)
 --- @return nil
-return function(capabilities)
+return function()
 	vim.lsp.config("clangd", {
-		capabilities = capabilities,
 		cmd = {
 			"clangd",
 			"--background-index",
