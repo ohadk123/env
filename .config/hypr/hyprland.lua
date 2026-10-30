@@ -199,6 +199,29 @@ hl.bind(mainMod .. " + S",         hl.dsp.exec_cmd(search))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd(reloadWaybar))
 hl.bind(mainMod .. " + T",         hl.dsp.exec_cmd("~/env/themes/apply-color.sh"))
 
+-- Dashboard on workspace 2. Floating, so the two rows size independently:
+--   ┌──────────────┬─────────┐
+--   │  fastfetch   │  cava   │
+--   ├─────────┬────┴─────────┤
+--   │ spotify │     btop     │
+--   └─────────┴──────────────┘
+-- move is relative to the monitor; numbers are for 2560x1440 with the 32px bar.
+-- Bottom row is 800px = 40 rows of btop at font_size 12.
+local dashboard = {
+    { cmd = "kitty -o confirm_os_window_close=0 sh -c 'printf \"%s\" \"$(fastfetch --pipe false | head -n -2)\"; tput civis; exec sleep infinity'", move = "7 39",    size = "1810 586" },
+    { cmd = "kitty cava",                        move = "1825 39", size = "728 586" },
+    { cmd = "spotify",                           move = "7 633",   size = "837 800" },
+    { cmd = "kitty -o font_size=14 btop",        move = "852 633", size = "1701 800" },
+}
+local function open_dashboard()
+    for _, w in ipairs(dashboard) do
+        hl.exec_cmd(w.cmd, { workspace = "2 silent", float = true, move = w.move, size = w.size })
+    end
+end
+hl.workspace_rule({ workspace = "2", monitor = "DP-2" }) -- dashboard positions are for this monitor
+hl.bind(mainMod .. " + D", open_dashboard)
+hl.on("hyprland.start", open_dashboard)
+
 -- Move focus with mainMod + hjkl
 hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
