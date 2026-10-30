@@ -17,3 +17,4 @@ pkill -USR1 kitty || true
 makoctl reload || true
 pkill -USR1 nvim || true
 pkill -USR1 cava || true
+pkill -USR2 btop || true
