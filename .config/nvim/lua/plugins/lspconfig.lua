@@ -9,18 +9,28 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        { "mason-org/mason.nvim", opts = {
-            registries = {
-                "github:mason-org/mason-registry",
-            },
-            providers = {
-                "mason.providers.client",
-            },
-        } }, -- LSP/DAP/Linter installer & manager
-         "williamboman/mason-lspconfig.nvim",
+        { "mason-org/mason.nvim", opts = {} }, -- LSP/DAP/Linter installer & manager
+        "williamboman/mason-lspconfig.nvim",
     },
     config = function()
-        require("utils.diagnostics").setup()
+        local S = vim.diagnostic.severity
+        local icons = {
+            [S.ERROR] = " ",
+            [S.WARN] = " ",
+            [S.INFO] = "",
+            [S.HINT] = "",
+        }
+        vim.diagnostic.config({
+            severity_sort = true,
+            float = { border = "rounded", source = "if_many" },
+            underline = { severity = S.ERROR },
+            signs = { text = icons },
+            virtual_text = {
+                source = "if_many",
+                spacing = 2,
+                format = function(d) return icons[d.severity] .. d.message end,
+            },
+        })
         require("servers")
     end,
 }
